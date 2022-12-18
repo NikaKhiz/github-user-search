@@ -1,14 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 import searchLogo from "../assets/icon-search.svg";
+import { useGlobalContext } from "../context";
 const StyledForm = styled.form`
-  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 23px 30px;
+  padding: 10px 10px 10px 30px;
   border-radius: 15px;
+  background: var(--clr-white-primary);
   box-shadow: 0px 16px 30px -10px rgba(70, 96, 187, 0.198567);
 `;
 const StyledSearch = styled.div`
@@ -27,6 +28,7 @@ const StyledButton = styled.button`
   line-height: 24px;
   color: var(--clr-white-primary);
   background-color: var(--clr-blue-primary);
+  cursor: pointer;
 `;
 const StyledInput = styled.input`
   border: none;
@@ -41,11 +43,22 @@ const StyledInput = styled.input`
   }
 `;
 const Search = () => {
+  const { userName, setUserName, setSearch } = useGlobalContext();
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setSearch(userName);
+    setUserName("");
+  };
   return (
-    <StyledForm>
+    <StyledForm onSubmit={handleSubmit}>
       <StyledSearch>
         <img src={searchLogo} alt="search logo" />
-        <StyledInput type="text" placeholder="Search Github Username..." />
+        <StyledInput
+          type="text"
+          placeholder="Search Github Username..."
+          value={userName}
+          onChange={(e) => setUserName(e.target.value)}
+        />
       </StyledSearch>
       <StyledButton type="submit">Search</StyledButton>
     </StyledForm>

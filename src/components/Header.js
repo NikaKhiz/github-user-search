@@ -6,7 +6,7 @@ const StyledHeader = styled.header`
   display: flex;
   justify-content: space-between;
   width: 100%;
-  padding: 23px 30px;
+  padding: 23px 0;
 `;
 const ThemeCont = styled.div`
   display: flex;
