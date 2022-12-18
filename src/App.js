@@ -1,8 +1,13 @@
+import React from "react";
+import Globals from "./components/Globals";
 function App() {
   return (
-    <div className="App">
-      <h1>Github User Search App</h1>
-    </div>
+    <>
+      <Globals />
+      <div>
+        <h1>Github User Search App</h1>
+      </div>
+    </>
   );
 }
 
