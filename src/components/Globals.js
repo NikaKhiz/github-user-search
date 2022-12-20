@@ -18,13 +18,12 @@ const Globals = createGlobalStyle`
   --ff-primary:"Space Mono", monospace;
   --fw-regular: 400;
   --fw-bold: 700;
-  /* breakpoints */
-  --bp-tablet: 768px;
-  --bp-dekstop: 1024px;
 }
 
 body {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: 15px;
@@ -35,41 +34,12 @@ body {
   color: var(--clr-gray-neutral);
 }
 
-
 h1 {
   font-size: 26px;
   line-height: 38px;
   font-weight: var(--fw-bold);
   color: var(--clr-dark-bolder);
 }
-/* h2 {
-  font-size: 22px;
-  line-height: 33px;
-  font-weight: var(--fw-bold);
-  color: var(--clr-dark-bolder);
-
-}
-h3 {
-  font-size: 16px;
-  line-height: 24px;
-  font-weight: var(--fw-regular);
-  color: var(--clr-dark-bolder);
-
-}
-h4 {
-  font-size: 13px;
-  line-height: 20px;
-  font-weight: var(--fw-regular);
-  color: var(--clr-dark-bolder);
-
-}       
-p {
-  font-family: 'Space Mono';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 13px;
-  line-height: 19px;
-} */
 
 `;
 export const Container = styled.div`

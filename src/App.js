@@ -8,10 +8,17 @@ import Result from "./components/Result";
 
 const AppCont = styled.div`
   width: 100%;
-  max-width: 730px;
   margin-inline: auto;
   display: flex;
   flex-direction: column;
+  gap: 15px;
+  padding: 25px;
+  @media screen and (min-width: 768px) {
+    max-width: 570px;
+  }
+  @media screen and (min-width: 1024px) {
+    max-width: 730px;
+  }
 `;
 
 function App() {

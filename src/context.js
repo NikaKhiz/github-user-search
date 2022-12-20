@@ -29,6 +29,7 @@ const AppProveder = ({ children }) => {
             location,
             twitter_username,
             blog,
+            login,
           } = userInfo;
           return {
             img: avatar_url,
@@ -43,6 +44,7 @@ const AppProveder = ({ children }) => {
             location: location,
             twitter: twitter_username,
             blog: blog,
+            login: login,
           };
         });
         setUser(newUser);
