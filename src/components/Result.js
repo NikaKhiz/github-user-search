@@ -5,68 +5,141 @@ import twitterLogo from "../assets/icon-twitter.svg";
 import websiteLogo from "../assets/icon-website.svg";
 import companyLogo from "../assets/icon-company.svg";
 import { useGlobalContext } from "../context";
-const StyledResultDiv = styled.div`
-  background: #fefefe;
+
+const ResultContainer = styled.div`
+  background-color: var(--clr-white-primary);
+  padding: 30px 25px 50px 25px;
   box-shadow: 0px 16px 30px -10px rgba(70, 96, 187, 0.198567);
   border-radius: 15px;
-  padding: 25px;
 `;
-const StyledSocials = styled.div`
-  display: flex;
-  flex-direction: column;
-  @media screen and (min-width: 768px) {
-    flex-direction: row;
-    justify-content: space-between;
+const ResultGridCont = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  @media screen and (min-width: 1024px) {
+    grid-template-columns: 150px 1fr;
   }
 `;
-const StyledSocial = styled.div`
-  display: flex;
-  gap: 20px;
-  align-items: center;
-  justify-content: start;
-`;
-const StyledSocialIcon = styled.img`
-  width: 15px;
-  height: 20px;
-`;
-const StyledSocialText = styled.p`
-  font-weight: 400;
-  font-size: 13px;
-  line-height: 19px;
-`;
-
-const StyledGhInfo = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`;
-const StyledGhInfoDiv = styled.div`
-  display: flex;
-  flex-direction: column;
-  background-color: var(--clr-bg-white);
-`;
-const StyledGhInfoText = styled.p`
-  font-size: 11px;
-  line-height: 16px;
-  text-align: center;
-  text-transform: capitalize;
-`;
-const StyledNumbers = styled.p`
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 24px;
-  color: var(--clr-dark-bolder);
-`;
-const UserImage = styled.img`
+const GridImage = styled.img`
   width: 120px;
   height: 120px;
   border-radius: 50%;
+  display: none;
+  @media screen and (min-width: 1024px) {
+    display: block;
+  }
 `;
+const ResultContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 35px;
+`;
+const GeneralInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 35px;
+
+  @media screen and (min-width: 768px) {
+    gap: 40px;
+  }
+  @media screen and (min-width: 768px) {
+    gap: 20px;
+  }
+`;
+const UpperGeneral = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+  @media screen and (min-width: 768px) {
+    gap: 40px;
+  }
+`;
+const UserImage = styled.img`
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  @media screen and (min-width: 768px) {
+    width: 120px;
+    height: 120px;
+  }
+  @media screen and (min-width: 1024px) {
+    display: none;
+  }
+`;
+const UpperGeneralFlexTextes = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 6px;
+  @media screen and (min-width: 1024px) {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+`;
+const LoginText = styled.p`
+  font-size: 13px;
+  line-height: 19px;
+  color: var(--clr-blue-primary);
+`;
+const LowerGeneral = styled.div``;
+
+const FollowersInfo = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--clr-bg-light);
+  padding: 30px;
+  border-radius: 10px;
+  & > * {
+    display: flex;
+    flex-direction: column;
+  }
+
+  @media screen and (min-width:768px){
+    justify-content: start;
+    gap: 90px;
+  }
+`;
+const FollowersText = styled.p`
+  font-size: 15px;
+  line-height: 20px;
+  text-transform: capitalize;
+`;
+const FollowersNumbers = styled.p`
+  font-size: 15px;
+  line-height: 25px;
+  font-weight: 700;
+  color: var(--clr-dark-bolder);
+  @media screen and (min-width: 768px) {
+    font-size: 22px;
+    line-height: 33px;
+  }
+`;
+
+const SocialInfo = styled.div`
+display:flex;
+flex-direction: column;
+gap: 20px;
+@media screen and (min-width:768px){
+  flex-direction: row;
+}
+`;
+const Socials = styled.div`
+display: flex;
+flex-direction: column;
+gap: 20px;
+`
+const SocialDiv = styled.div`
+display: flex;
+gap: 15px;
+`
 const Result = () => {
   const { user } = useGlobalContext();
 
   return (
-    <StyledResultDiv>
+    <ResultContainer>
       {user.map((userInfo, index) => {
         const {
           img,
@@ -84,64 +157,46 @@ const Result = () => {
           login,
         } = userInfo;
         return (
-          <div key={index}>
-            <UserImage src={img} alt={usersName} />
-            <div className="flex-cont">
-              <div className="general-info">
-                <div className="name">
-                  <h1>{usersName}</h1>
-                  <a href={ghUrl}>@{login}</a>
-                  <p>{joined}</p>
+          <ResultGridCont key={index}>
+            <GridImage src={img} alt="user image" />
+            <ResultContent>
+              <GeneralInfo>
+                <UpperGeneral>
+                  <UserImage src={img} alt="user image" />
+                  <UpperGeneralFlexTextes>
+                    <div>
+                      <h1>{usersName}</h1>
+                      <LoginText>@{login}</LoginText>
+                    </div>
+                    <p>{joined}</p>
+                  </UpperGeneralFlexTextes>
+                </UpperGeneral>
+                <LowerGeneral>
+                  <p>{bio ? bio : "This user has no bio."}</p>
+                </LowerGeneral>
+              </GeneralInfo>
+              <FollowersInfo>
+                <div>
+                  <FollowersText>repos</FollowersText>
+                  <FollowersNumbers>{repos}</FollowersNumbers>
                 </div>
-                <div className="bio">
-                  {bio ? bio : "This profile has no bio."}
+                <div>
+                  <FollowersText>followers</FollowersText>
+                  <FollowersNumbers>{followers}</FollowersNumbers>
                 </div>
-              </div>
-              <StyledGhInfo>
-                <StyledGhInfoDiv>
-                  <StyledGhInfoText>repos</StyledGhInfoText>
-                  <StyledNumbers>{repos}</StyledNumbers>
-                </StyledGhInfoDiv>
-                <StyledGhInfoDiv>
-                  <StyledGhInfoText>followers</StyledGhInfoText>
-                  <StyledNumbers>{followers}</StyledNumbers>
-                </StyledGhInfoDiv>
-                <StyledGhInfoDiv>
-                  <StyledGhInfoText>following</StyledGhInfoText>
-                  <StyledNumbers>{following}</StyledNumbers>
-                </StyledGhInfoDiv>
-              </StyledGhInfo>
-              <div>
-                <StyledSocials>
-                  <div>
-                    <StyledSocial>
-                      <StyledSocialIcon src={locationLogo} alt="" />
-                      <StyledSocialText>{location}</StyledSocialText>
-                    </StyledSocial>
-                    <StyledSocial>
-                      <StyledSocialIcon src={websiteLogo} alt="" />
-                      <StyledSocialText>{blog}</StyledSocialText>
-                    </StyledSocial>
-                  </div>
-                  <div>
-                    <StyledSocial>
-                      <StyledSocialIcon src={twitterLogo} alt="" />
-                      <StyledSocialText>
-                        {twitter ? twitter : "Not Available"}
-                      </StyledSocialText>
-                    </StyledSocial>
-                    <StyledSocial>
-                      <StyledSocialIcon src={companyLogo} alt="" />
-                      <StyledSocialText>{company}</StyledSocialText>
-                    </StyledSocial>
-                  </div>
-                </StyledSocials>
-              </div>
-            </div>
-          </div>
+                <div>
+                  <FollowersText>following</FollowersText>
+                  <FollowersNumbers>{following}</FollowersNumbers>
+                </div>
+              </FollowersInfo>
+              <SocialInfo>
+
+              </SocialInfo>
+            </ResultContent>
+          </ResultGridCont>
         );
       })}
-    </StyledResultDiv>
+    </ResultContainer>
   );
 };
 

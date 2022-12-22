@@ -19,11 +19,15 @@ const Globals = createGlobalStyle`
   --fw-regular: 400;
   --fw-bold: 700;
 }
-
-body {
+*,
+*::after,
+*::before{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+body {
+  
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: 15px;
@@ -35,10 +39,14 @@ body {
 }
 
 h1 {
-  font-size: 26px;
-  line-height: 38px;
+  font-size: 15px;
+  line-height: 25px;
   font-weight: var(--fw-bold);
   color: var(--clr-dark-bolder);
+  @media screen and (min-width:768px){
+    font-size: 26px;
+    line-height: 39px;
+  }
 }
 
 `;
