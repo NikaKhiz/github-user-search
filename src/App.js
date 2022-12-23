@@ -5,7 +5,7 @@ import { Container } from "./components/Globals";
 import Header from "./components/Header";
 import Search from "./components/Search";
 import Result from "./components/Result";
-
+import { useGlobalContext } from "./context";
 const AppCont = styled.div`
   width: 100%;
   margin-inline: auto;
@@ -22,9 +22,10 @@ const AppCont = styled.div`
 `;
 
 function App() {
+  const { darkMode } = useGlobalContext();
   return (
     <>
-      <Globals />
+      <Globals darkMode={darkMode} />
       <Container>
         <AppCont>
           <Header />

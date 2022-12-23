@@ -4,8 +4,9 @@ import { useContext, useState } from "react";
 const AppContext = React.createContext();
 
 const AppProveder = ({ children }) => {
-  const [darkmode, setDarkMode] = useState(true);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
   const [user, setUser] = useState([]);
   const [userName, setUserName] = useState("");
   const [search, setSearch] = useState("octocat");
@@ -63,7 +64,7 @@ const AppProveder = ({ children }) => {
   return (
     <AppContext.Provider
       value={{
-        darkmode,
+        darkMode,
         setDarkMode,
         error,
         user,

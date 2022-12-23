@@ -97,7 +97,7 @@ const FollowersInfo = styled.div`
     flex-direction: column;
   }
 
-  @media screen and (min-width:768px){
+  @media screen and (min-width: 768px) {
     justify-content: start;
     gap: 90px;
   }
@@ -111,6 +111,7 @@ const FollowersNumbers = styled.p`
   font-size: 15px;
   line-height: 25px;
   font-weight: 700;
+  transition: var(--transition-default);
   color: var(--clr-dark-bolder);
   @media screen and (min-width: 768px) {
     font-size: 22px;
@@ -119,22 +120,28 @@ const FollowersNumbers = styled.p`
 `;
 
 const SocialInfo = styled.div`
-display:flex;
-flex-direction: column;
-gap: 20px;
-@media screen and (min-width:768px){
-  flex-direction: row;
-}
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+    gap: 70px;
+  }
 `;
 const Socials = styled.div`
-display: flex;
-flex-direction: column;
-gap: 20px;
-`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+`;
 const SocialDiv = styled.div`
-display: flex;
-gap: 15px;
-`
+  display: flex;
+  align-items: center;
+  gap: 15px;
+`;
+const SocialsImage = styled.img`
+  height: 20px;
+  width: 20px;
+`;
 const Result = () => {
   const { user } = useGlobalContext();
 
@@ -190,7 +197,26 @@ const Result = () => {
                 </div>
               </FollowersInfo>
               <SocialInfo>
-
+                <Socials>
+                  <SocialDiv>
+                    <SocialsImage src={locationLogo} alt="location logo" />
+                    <p>{location}</p>
+                  </SocialDiv>
+                  <SocialDiv>
+                    <SocialsImage src={websiteLogo} alt="location logo" />
+                    <a href={blog}>{blog}</a>
+                  </SocialDiv>
+                </Socials>
+                <Socials>
+                  <SocialDiv>
+                    <SocialsImage src={twitterLogo} alt="location logo" />
+                    <p>{twitter ? twitter : "Not Available."}</p>
+                  </SocialDiv>
+                  <SocialDiv>
+                    <SocialsImage src={companyLogo} alt="location logo" />
+                    <p>{company}</p>
+                  </SocialDiv>
+                </Socials>
               </SocialInfo>
             </ResultContent>
           </ResultGridCont>
