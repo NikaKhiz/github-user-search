@@ -7,7 +7,11 @@ import companyLogo from "../assets/icon-company.svg";
 import { useGlobalContext } from "../context";
 
 const ResultContainer = styled.div`
-  background-color: var(--clr-white-primary);
+  transition: var(--transition-default);
+  background-color: ${(props) =>
+    props.darkMode === false
+      ? "var(--clr-white-primary)"
+      : "var(--clr-dark-bold)"};
   padding: 30px 25px 50px 25px;
   box-shadow: 0px 16px 30px -10px rgba(70, 96, 187, 0.198567);
   border-radius: 15px;
@@ -89,7 +93,11 @@ const FollowersInfo = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  background-color: var(--clr-bg-light);
+  transition: var(--transition-default);
+  background-color: ${(props) =>
+    props.darkMode === false
+      ? "var(--clr-bg-light)"
+      : "var(--clr-dark-bolder)"};
   padding: 30px;
   border-radius: 10px;
   & > * {
@@ -103,16 +111,23 @@ const FollowersInfo = styled.div`
   }
 `;
 const FollowersText = styled.p`
-  font-size: 15px;
-  line-height: 20px;
+  font-size: 11px;
+  line-height: 16px;
   text-transform: capitalize;
+  @media screen and (min-width: 768px) {
+    font-size: 13px;
+    line-height: 19px;
+  }
 `;
 const FollowersNumbers = styled.p`
   font-size: 15px;
   line-height: 25px;
   font-weight: 700;
   transition: var(--transition-default);
-  color: var(--clr-dark-bolder);
+  color: ${(props) =>
+    props.darkMode === false
+      ? "var(--clr-dark-bolder)"
+      : "var(--clr-white-primary)"};
   @media screen and (min-width: 768px) {
     font-size: 22px;
     line-height: 33px;
@@ -143,10 +158,10 @@ const SocialsImage = styled.img`
   width: 20px;
 `;
 const Result = () => {
-  const { user } = useGlobalContext();
+  const { user, darkMode } = useGlobalContext();
 
   return (
-    <ResultContainer>
+    <ResultContainer darkMode={darkMode}>
       {user.map((userInfo, index) => {
         const {
           img,
@@ -172,39 +187,53 @@ const Result = () => {
                   <UserImage src={img} alt="user image" />
                   <UpperGeneralFlexTextes>
                     <div>
-                      <h1>{usersName}</h1>
+                      <h1>{usersName ? usersName : "No Username."}</h1>
                       <LoginText>@{login}</LoginText>
                     </div>
-                    <p>{joined}</p>
+                    <p>
+                      {new Date(joined).toLocaleDateString("en", {
+                        year: "numeric",
+                        month: "long",
+                        day: "2-digit",
+                      })}
+                    </p>
                   </UpperGeneralFlexTextes>
                 </UpperGeneral>
                 <LowerGeneral>
                   <p>{bio ? bio : "This user has no bio."}</p>
                 </LowerGeneral>
               </GeneralInfo>
-              <FollowersInfo>
+              <FollowersInfo darkMode={darkMode}>
                 <div>
                   <FollowersText>repos</FollowersText>
-                  <FollowersNumbers>{repos}</FollowersNumbers>
+                  <FollowersNumbers darkMode={darkMode}>
+                    {repos}
+                  </FollowersNumbers>
                 </div>
                 <div>
                   <FollowersText>followers</FollowersText>
-                  <FollowersNumbers>{followers}</FollowersNumbers>
+                  <FollowersNumbers darkMode={darkMode}>
+                    {followers}
+                  </FollowersNumbers>
                 </div>
                 <div>
                   <FollowersText>following</FollowersText>
-                  <FollowersNumbers>{following}</FollowersNumbers>
+                  <FollowersNumbers darkMode={darkMode}>
+                    {following}
+                  </FollowersNumbers>
                 </div>
               </FollowersInfo>
               <SocialInfo>
                 <Socials>
                   <SocialDiv>
                     <SocialsImage src={locationLogo} alt="location logo" />
-                    <p>{location}</p>
+                    <p>{location ? location : "Not Available."}</p>
                   </SocialDiv>
                   <SocialDiv>
                     <SocialsImage src={websiteLogo} alt="location logo" />
-                    <a href={blog}>{blog}</a>
+                    <a href={blog ? blog : "#"}>
+                      {blog ? blog : "Not Available."}
+                    </a>
                   </SocialDiv>
                 </Socials>
                 <Socials>
@@ -214,7 +243,7 @@ const Result = () => {
                   </SocialDiv>
                   <SocialDiv>
                     <SocialsImage src={companyLogo} alt="location logo" />
-                    <p>{company}</p>
+                    <p>{company ? company : "Not Available."}</p>
                   </SocialDiv>
                 </Socials>
               </SocialInfo>

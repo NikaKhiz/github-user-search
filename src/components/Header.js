@@ -12,7 +12,7 @@ const StyledHeader = styled.header`
 const ThemeCont = styled.div`
   display: flex;
   align-items: center;
-  gap: 1rem;
+  justify-content: center;
 `;
 const ThemeText = styled.p`
   color: ${(props) =>
@@ -35,6 +35,8 @@ const ThemeBtn = styled.button`
   outline: none;
   background: none;
   cursor: pointer;
+  display: flex;
+  gap: 1rem;
 `;
 const Header = () => {
   const { darkMode, setDarkMode } = useGlobalContext();
@@ -42,12 +44,14 @@ const Header = () => {
     <StyledHeader>
       <h1>devfinder</h1>
       <ThemeCont>
-        <ThemeText darkMode={darkMode}>{darkMode ? "LIGHT" : "DARK"}</ThemeText>
         <ThemeBtn
           onClick={() => {
             setDarkMode(!darkMode);
           }}
         >
+          <ThemeText darkMode={darkMode}>
+            {darkMode ? "LIGHT" : "DARK"}
+          </ThemeText>
           <ThemeImg src={darkMode ? sunLogo : moonLogo} alt="theme img" />
         </ThemeBtn>
       </ThemeCont>

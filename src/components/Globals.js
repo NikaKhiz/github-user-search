@@ -19,7 +19,7 @@ const Globals = createGlobalStyle`
   --fw-bold: 700;
 
   /* transition */
-  --transition-default: all .3s ease-in-out;
+  --transition-default: background-color .3s ease-in-out, color .3s ease-in-out;
 }
 *,
 *::after,
@@ -33,17 +33,14 @@ body {
   -moz-osx-font-smoothing: grayscale;
   font-size: 15px;
   line-height: 25px;
-  font-family: var(--ff-primary);
   font-weight: 400;
+  font-family: var(--ff-primary);
+  transition: var(--transition-default);
   background: ${(props) =>
     props.darkMode === false
       ? "var(--clr-bg-light)"
       : "var(--clr-dark-bolder)"};
-  color:  ${(props) =>
-    props.darkMode === false
-      ? "var(--clr-gray-neutral)"
-      : "var(--clr-white-primary)"};
-  transition: var(--transition-default);
+   
 }
 
 h1 {
@@ -60,7 +57,33 @@ h1 {
     line-height: 39px;
   }
 }
-
+a{
+  text-decoration:none;
+  transition: var(--transition-default);
+  color:  ${(props) =>
+    props.darkMode === false
+      ? "var(--clr-gray-neutral)"
+      : "var(--clr-white-primary)"};
+  font-size: 15px;
+  line-height: 20px;
+  @media screen and (min-width:768px) {
+    font-size: 15px;
+    line-height: 25px;
+  }
+}
+p {
+  transition: var(--transition-default);
+  color:  ${(props) =>
+    props.darkMode === false
+      ? "var(--clr-gray-neutral)"
+      : "var(--clr-white-primary)"};
+  font-size: 15px;
+  line-height: 20px;
+  @media screen and (min-width:768px) {
+    font-size: 15px;
+    line-height: 25px;
+  }
+}
 `;
 export const Container = styled.div`
   width: 100%;

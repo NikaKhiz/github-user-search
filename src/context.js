@@ -4,7 +4,6 @@ import { useContext, useState } from "react";
 const AppContext = React.createContext();
 
 const AppProveder = ({ children }) => {
-  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
   const [user, setUser] = useState([]);
@@ -12,8 +11,8 @@ const AppProveder = ({ children }) => {
   const [search, setSearch] = useState("octocat");
   const url = `https://api.github.com/users/${search}`;
   const getUsers = useCallback(async () => {
-    try {
-      const response = await fetch(url);
+    const response = await fetch(url);
+    if (response.status >= 200 && response.status <= 299) {
       const users = await response.json();
       if (users) {
         const newUser = [users].map((userInfo) => {
@@ -49,16 +48,14 @@ const AppProveder = ({ children }) => {
           };
         });
         setUser(newUser);
-      } else {
-        setUser(user);
-        setError(true);
       }
-    } catch (error) {
+    } else {
+      setUser(user);
       setError(true);
-      throw new Error(error);
     }
   }, [url]);
   useEffect(() => {
+    setError(false);
     getUsers();
   }, [search, getUsers]);
   return (
